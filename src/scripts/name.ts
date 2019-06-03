@@ -1,12 +1,10 @@
 // import $ from 'jquery';
-import rand from "./rand";
-const books = require("./json/*.json");
+import random from "./random";
+// const books = require("./json/*.json");
+import books from "./json/*.json";
 
-class Namer {
+class Name {
   constructor() {
-    // this.book = null;
-    this.count = 6;
-    // console.log(Object.values(books).reduce((a, b) => [...a, ...b]));
     this.book = Object.values(books).reduce((a, b) => [...a, ...b]);
   }
 
@@ -33,18 +31,17 @@ class Namer {
 
   // 清除标点符号
   cleanPunctuation(str) {
-    const puncReg = /[<>《》！*\(\^\)\$%~!@#…&%￥—\+=、。，？；‘’“”：·`]/g;
-    return str.replace(puncReg, "");
+    const punctuationReg = /[<>《》！*\(\^\)\$%~!@#…&%￥—\+=、。，？；‘’“”：·`]/g;
+    return str.replace(punctuationReg, "");
   }
 
   // 过滤敏感词
   cleanBadChar(str) {
-    const badChars = "胸鬼懒禽鸟鸡我邪罪凶丑仇鼠蟋蟀淫秽妹狐鸡鸭蝇悔鱼肉苦犬吠窥血丧饥女搔父母昏狗蟊疾病痛死潦哀痒害蛇牲妇狸鹅穴畜烂兽靡爪氓劫鬣螽毛婚姻匪婆羞辱".split(
-      "",
-    );
+    const badChars =
+      "胸鬼懒禽鸟鸡我邪罪凶丑仇鼠蟋蟀淫秽妹狐鸡鸭蝇悔鱼肉苦犬吠窥血丧饥女搔父母昏狗蟊疾病痛死潦哀痒害蛇牲妇狸鹅穴畜烂兽靡爪氓劫鬣螽毛婚姻匪婆羞辱";
     return str
       .split("")
-      .filter(char => badChars.indexOf(char) === -1)
+      .filter(char => !badChars.includes(char))
       .join("");
   }
 
@@ -52,12 +49,9 @@ class Namer {
   genName() {
     if (!this.book) {
       return null;
-    } else {
-      // this.loadBook(this.book);
     }
-    // const len = this.book.length;
     try {
-      const passage = rand.choose(this.book);
+      const passage = random.choice(this.book);
       const { content, title, author, book, dynasty } = passage;
       if (!content) {
         return null;
@@ -69,11 +63,7 @@ class Namer {
         return null;
       }
 
-      // if (Array.isArray(sentenceArr) && sentenceArr.length <= 0) {
-      //   log({ passage, sentenceArr });
-      // }
-
-      const sentence = rand.choose(sentenceArr);
+      const sentence = random.choice(sentenceArr);
 
       const cleanSentence = this.cleanBadChar(this.cleanPunctuation(sentence));
       if (cleanSentence.length <= 2) {
@@ -103,11 +93,11 @@ class Namer {
   // 取字
   getTwoChar(arr) {
     const len = arr.length;
-    const first = rand.between(0, len);
-    let second = rand.between(0, len);
+    const first = random.int(0, len);
+    let second = random.int(0, len);
     let cnt = 0;
     while (second === first) {
-      second = rand.between(0, len);
+      second = random.int(0, len);
       cnt++;
       if (cnt > 100) {
         break;
@@ -118,4 +108,4 @@ class Namer {
       : `${arr[second]}${arr[first]}`;
   }
 }
-export default Namer;
+export default Name;
