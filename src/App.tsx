@@ -63,17 +63,9 @@ const useStyles = makeStyles(theme => ({
 // const classes = {};
 
 export default function App() {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     names: [],
-  //     surname: "李",
-  //   };
-  // }
-
   const generateName = (len = 9) => {
     const namer = new Name();
-    const names: any = [];
+    const names = [];
     for (let i = 0; i < len; i++) {
       const name = namer.genName();
       if (name) {
@@ -129,32 +121,28 @@ export default function App() {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {names &&
-              names.map &&
-              names
-                .filter(item => item)
-                .map((item, index) => (
-                  <Grid item key={index} xs={12} sm={6} md={4}>
-                    <Card className={classes.card}>
-                      <CardContent
-                        className={classes.cardContent}
-                        style={{ height: 130 }}
-                      >
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {surname}
-                          {item.name}
-                        </Typography>
-                        <Typography>{item.sentence}</Typography>
-                      </CardContent>
-                      <CardActions style={{ height: 60 }}>
-                        <div />
-                        <div>
-                          ——《{item.book} · {item.title}》
-                        </div>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
+            {names.map((item, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardContent
+                    className={classes.cardContent}
+                    style={{ height: 130 }}
+                  >
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {surname}
+                      {item.name}
+                    </Typography>
+                    <Typography>{item.sentence}</Typography>
+                  </CardContent>
+                  <CardActions style={{ height: 60 }}>
+                    <div />
+                    <div>
+                      ——《{item.book} · {item.title}》
+                    </div>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </main>
