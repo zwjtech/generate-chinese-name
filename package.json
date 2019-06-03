@@ -1,0 +1,40 @@
+{
+  "name": "generate-chinese-name",
+  "version": "1.0.0",
+  "description": "中文起名",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luwenjiechn/generate-chinese-name.git"
+  },
+  "keywords": [
+    "generate-name",
+    "起名",
+    "名称生成",
+    "名字",
+    "create-name"
+  ],
+  "author": "luwenjiechn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luwenjiechn/generate-chinese-name/issues"
+  },
+  "homepage": "https://github.com/luwenjiechn/generate-chinese-name#readme",
+  "devDependencies": {
+    "jquery": "^3.4.1",
+    "node-sass": "^4.12.0",
+    "parcel-bundler": "^1.12.3",
+    "sass-loader": "^7.1.0"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
