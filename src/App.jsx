@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardActions } from "@material-ui/core";
+import { Card, CardContent, CardActions, TextField } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -73,7 +73,12 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       names: [],
+      surname: "李",
     };
+  }
+
+  componentDidMount() {
+    this.generateName();
   }
 
   generateName() {
@@ -93,9 +98,8 @@ export default class App extends React.Component {
         <CssBaseline />
         <AppBar position="relative">
           <Toolbar>
-            <CameraIcon className={classes.icon} />
             <Typography variant="h6" color="inherit" noWrap>
-              名称生成
+              起啥名
             </Typography>
           </Toolbar>
         </AppBar>
@@ -110,7 +114,7 @@ export default class App extends React.Component {
                 color="textPrimary"
                 gutterBottom
               >
-                一键起名
+                起啥名
               </Typography>
               <Typography
                 variant="h5"
@@ -121,14 +125,31 @@ export default class App extends React.Component {
                 用诗经, 楚辞, 唐诗,宋词起名字
               </Typography>
               <div className={classes.heroButtons}>
-                <Grid container spacing={2} justify="center">
+                <Grid
+                  container
+                  spacing={2}
+                  justify="center"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <TextField
+                      id="outlined-bare"
+                      className={classes.textField}
+                      defaultValue={this.state.surname}
+                      onChange={event => {
+                        this.setState({ surname: event.target.value });
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                  </Grid>
                   <Grid item>
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => this.generateName()}
                     >
-                      生成
+                      随缘生成
                     </Button>
                   </Grid>
                 </Grid>
@@ -145,15 +166,20 @@ export default class App extends React.Component {
                   .map((item, index) => (
                     <Grid item key={index} xs={12} sm={6} md={4}>
                       <Card className={classes.card}>
-                        <CardContent className={classes.cardContent}>
+                        <CardContent
+                          className={classes.cardContent}
+                          style={{ height: 130 }}
+                        >
                           <Typography gutterBottom variant="h5" component="h2">
+                            {this.state.surname}
                             {item.name}
                           </Typography>
                           <Typography>{item.sentence}</Typography>
                         </CardContent>
-                        <CardActions>
-                          <div style={{ float: "right" }}>
-                            ——《{item.book}·{item.title}》
+                        <CardActions style={{ height: 60 }}>
+                          <div />
+                          <div>
+                            ——《{item.book} · {item.title}》
                           </div>
                         </CardActions>
                       </Card>
