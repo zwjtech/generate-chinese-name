@@ -67,7 +67,7 @@ export default function App() {
     const namer = new Name();
     const names = [];
     for (let i = 0; i < len; i++) {
-      const name = namer.genName();
+      const name = namer.generate();
       if (name) {
         names.push(name);
       }
