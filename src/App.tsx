@@ -13,10 +13,11 @@ import {
   Container,
   Link,
   Theme,
-  createStyles,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Name from "./scripts/name";
+import Name from "./lib/name";
+import random from "./lib/random";
+import surnameList from "./assets/json/surname.json";
 
 function MadeWithLove() {
   return (
@@ -75,6 +76,10 @@ export default function App() {
     return names;
   };
 
+  const generateSurname = () => {
+    return random.choice(surnameList);
+  };
+
   const [names, setNames] = useState(generateName());
   const [surname, setSurname] = useState("李");
   const classes = useStyles();
@@ -129,15 +134,31 @@ export default function App() {
                     style={{ height: 130 }}
                   >
                     <Typography gutterBottom variant="h5" component="h2">
-                      {surname}
+                      {surname || generateSurname()}
                       {item.name}
                     </Typography>
-                    <Typography>{item.sentence}</Typography>
+                    <Typography>
+                      {item.sentence &&
+                        item.sentence
+                          .split("")
+                          .map((char: any, index: number) => {
+                            const lineHight =
+                              item.sentence.indexOf(item.name[0]) === index ||
+                              item.sentence.lastIndexOf(item.name[1]) === index;
+                            return lineHight ? (
+                              <span style={{ color: "red" }} key={index}>
+                                {char}
+                              </span>
+                            ) : (
+                              char
+                            );
+                          })}
+                    </Typography>
                   </CardContent>
                   <CardActions style={{ height: 60 }}>
                     <div />
                     <div>
-                      ——《{item.book} · {item.title}》
+                      ——《{item.tag} · {item.title}》
                     </div>
                   </CardActions>
                 </Card>

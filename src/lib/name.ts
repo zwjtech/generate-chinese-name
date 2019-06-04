@@ -1,13 +1,15 @@
 import random from "./random";
 
 // @ts-ignore
-import books from "./json/*.json";
+import books from "../assets/json/books/*.json";
 
 class Name {
   constructor() {}
 
-  getBooks(): any {
-    return Object.values(books).reduce((a: any, b: any) => [...a, ...b], []);
+  getBooks({ tag } = {}): any {
+    return Object.values(books)
+      .reduce((a: any, b: any) => [...a, ...b], [])
+      .filter((item: any) => (tag ? item.tag === tag : true));
   }
 
   // 拆分诗句
@@ -24,27 +26,14 @@ class Name {
       .filter(item => item.length >= 8);
   }
 
-  // 清除标点符号
-  cleanPunctuation(str: string) {
-    const punctuationReg = /[<>《》！*\(\^\)\$%~!@#…&%￥—\+=、。，？；‘’“”：·`]/g;
-    return str.replace(punctuationReg, "");
-  }
-
-  // 过滤敏感词
-  cleanBadChar(str: string) {
-    const badChars =
-      "胸鬼懒禽鸟鸡我邪罪凶丑仇鼠蟋蟀淫秽妹狐鸡鸭蝇悔鱼肉苦犬吠窥血丧饥女搔父母昏狗蟊疾病痛死潦哀痒害蛇牲妇狸鹅穴畜烂兽靡爪氓劫鬣螽毛婚姻匪婆羞辱";
-    return str
-      .split("")
-      .filter((char: string) => !badChars.includes(char))
-      .join("");
-  }
-
   // 数据清洗
   cleanData(str: string) {
     // 标点符号
+    const badChars =
+      "胸鬼懒禽鸟鸡我邪罪凶丑仇鼠蟋蟀淫秽妹狐鸡鸭蝇悔鱼肉苦犬吠窥血丧饥女搔父母昏狗蟊疾病痛死潦哀痒害蛇牲妇狸鹅穴畜烂兽靡爪氓劫鬣螽毛婚姻匪婆羞辱";
+    const badCharsReg = `/${badChars.split("").join("|")}/g`;
     const punctuationReg = /[<>《》！*\(\^\)\$%~!@#…&%￥—\+=、。，？；‘’“”：·`]/g;
-    return str.replace(punctuationReg, "");
+    return str.replace(punctuationReg, "").replace(badCharsReg, "");
   }
 
   // 生成名字
@@ -55,7 +44,7 @@ class Name {
     }
     try {
       const passage = random.choice(bookList);
-      const { content, title, author, book, dynasty } = passage;
+      const { content, title, author, tag, dynasty } = passage;
       if (!content) {
         return null;
       }
@@ -68,33 +57,30 @@ class Name {
 
       const sentence = random.choice(sentenceArr);
 
-      const cleanSentence = this.cleanBadChar(this.cleanPunctuation(sentence));
+      // const cleanSentence = this.cleanBadChar(this.cleanPunctuation(sentence));
+      const cleanSentence = this.cleanData(sentence);
       if (cleanSentence.length <= 2) {
         return null;
       }
 
-      // log({ content, sentence });
-      // const charList = this.cleanBadChar(cleanSentence);
-      const name = this.getTwoChar(cleanSentence.split(""));
+      const name = this.getName(cleanSentence.split(""));
       const res = {
         name,
         sentence,
         content,
         title,
         author,
-        book,
+        tag,
         dynasty,
       };
       return res;
     } catch (err) {
       throw Error(err);
     }
-
-    // log('passage', passage);
   }
 
   // 取字
-  getTwoChar(arr: Array<any>) {
+  getName(arr: Array<any>) {
     const len = arr.length;
     const first = random.int(0, len);
     let second = random.int(0, len);
