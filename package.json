@@ -37,6 +37,7 @@
     "@types/react-dom": "^16.8.4",
     "node-sass": "^4.12.0",
     "parcel-bundler": "^1.12.3",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
     "parcel-plugin-sw-precache": "^1.1.1",
     "rimraf": "^2.6.3",
     "sass-loader": "^7.1.0",
