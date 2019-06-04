@@ -28,7 +28,7 @@ function MadeWithLove() {
     </Typography>
   );
 }
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => ({
     // marginTop: theme.spacing(4),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
   },
   card: {
     height: "100%",
