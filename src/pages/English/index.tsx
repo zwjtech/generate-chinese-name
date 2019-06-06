@@ -26,7 +26,7 @@ export default function() {
 
   return (
     <React.Fragment>
-      <div>
+      <div style={{marginBottom:16}}>
         <Container maxWidth="sm">
           <Grid container spacing={2} justify="center" alignItems="center">
             <Grid item>
