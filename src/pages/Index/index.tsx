@@ -23,7 +23,7 @@ const Index = (props: IProps) => {
   const { classes = {} } = props;
   const generateName = (len = 9) => {
     const namer = new Name();
-    const names = [];
+    const names: Array<any> = [];
     for (let i = 0; i < len; i++) {
       const name = namer.generate();
       if (name) {
@@ -39,7 +39,7 @@ const Index = (props: IProps) => {
 
   const [names, setNames] = useState(generateName());
   const [surname, setSurname] = useState("李");
-  console.log(props)
+  console.log(props);
   return (
     <React.Fragment>
       <div className={classes.heroContent}>
@@ -48,7 +48,6 @@ const Index = (props: IProps) => {
             <Grid container spacing={2} justify="center" alignItems="center">
               <Grid item>
                 <TextField
-                  id="outlined-bare"
                   defaultValue={surname}
                   onChange={event => {
                     setSurname(event.target.value);

@@ -30,6 +30,7 @@
     "@material-ui/icons": "^4.0.1",
     "@material-ui/styles": "^4.0.1",
     "chinese-random-name": "^1.0.0",
+    "random-name": "^0.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1"

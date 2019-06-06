@@ -42,7 +42,6 @@ export default (props: IProps) => {
         <AppBar>
           <Tabs value={value} onChange={handleChange}>
             <Tab label="逼格" value="/" />
-            <Tab label="中文" value="/cn" />
             <Tab label="英文" value="/en" />
           </Tabs>
         </AppBar>

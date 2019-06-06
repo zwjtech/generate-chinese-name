@@ -8,12 +8,16 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import { AutorenewOutlined } from "@material-ui/icons";
-// import Name from "chinese-random-name";
+import random from "random-name";
 
 export interface IProps {}
 
 export default function(props: IProps) {
   const [name, setName] = useState("");
+  
+  function generateName(){
+    setName(random())
+  }
   return (
     <Container maxWidth="sm">
       <Grid container spacing={2} justify="center" alignItems="center">
@@ -26,7 +30,7 @@ export default function(props: IProps) {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton edge="end">
+                  <IconButton edge="end" onClick={generateName}>
                     <AutorenewOutlined />
                   </IconButton>
                 </InputAdornment>

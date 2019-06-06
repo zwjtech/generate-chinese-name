@@ -7,7 +7,6 @@ import Header from "./components/Header";
 import { Router, Route } from "react-router-dom";
 import { createHashHistory } from "history";
 import English from "./pages/English";
-import Chinese from "./pages/Chinese";
 
 const history = createHashHistory();
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,7 +52,7 @@ export default (props: any) => {
           <Router history={history}>
             {/* <Index classes={classes} /> */}
             <Route path="/" exact component={Index} classes={classes} />
-            <Route path="/cn" component={Chinese} />
+            {/* <Route path="/cn" component={Chinese} /> */}
             <Route path="/en" component={English} />
           </Router>
         </Box>
