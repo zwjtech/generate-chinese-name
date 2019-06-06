@@ -15,7 +15,7 @@ export interface IProps {}
 export default function(props: IProps) {
   const [name, setName] = useState("");
   return (
-    <Container maxWidth="sm" {...props}>
+    <Container maxWidth="sm">
       <Grid container spacing={2} justify="center" alignItems="center">
         <Grid item>
           <TextField
