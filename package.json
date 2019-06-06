@@ -2,10 +2,11 @@
   "name": "generate-chinese-name",
   "version": "1.0.0",
   "description": "中文起名",
-  "main": "index.js",
   "scripts": {
-    "dev": "parcel src/index.html",
-    "build": "rimraf dist && parcel build src/index.html --public-url ."
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -32,20 +33,26 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.13",
     "@types/node": "^12.0.4",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
-    "node-sass": "^4.12.0",
-    "parcel-bundler": "^1.12.3",
-    "parcel-plugin-bundle-visualiser": "^1.2.0",
-    "parcel-plugin-sw-precache": "^1.1.1",
-    "rimraf": "^2.6.3",
-    "sass-loader": "^7.1.0",
+    "react-scripts": "^3.0.1",
     "typescript": "^3.5.1"
   },
-  "sw-precache": {
-    "maximumFileSizeToCacheInBytes": 10485760,
-    "additionalCodeFile": "serviceWorker.js",
-    "replacePrefix": "./"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

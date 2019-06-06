@@ -1,15 +1,17 @@
 import random from "./random";
 
 // @ts-ignore
-import books from "../assets/json/books/*.json";
+// import books from "../assets/json/books/*.json";
+// const books = require("../assets/json/books/*.json");
+import books from "../assets/json/books";
+
+// console.log(JSON.stringify(books));
+
+// console.log(bks);
 
 class Name {
-  constructor() {}
-
-  getBooks({ tag } = {}): any {
-    return Object.values(books)
-      .reduce((a: any, b: any) => [...a, ...b], [])
-      .filter((item: any) => (tag ? item.tag === tag : true));
+  getBooks({ tag } = { tag: "" }): any {
+    return books.filter((item: any) => (tag ? item.tag === tag : true));
   }
 
   // 拆分诗句
@@ -32,7 +34,7 @@ class Name {
     const badChars =
       "胸鬼懒禽鸟鸡我邪罪凶丑仇鼠蟋蟀淫秽妹狐鸡鸭蝇悔鱼肉苦犬吠窥血丧饥女搔父母昏狗蟊疾病痛死潦哀痒害蛇牲妇狸鹅穴畜烂兽靡爪氓劫鬣螽毛婚姻匪婆羞辱";
     const badCharsReg = `/${badChars.split("").join("|")}/g`;
-    const punctuationReg = /[<>《》！*\(\^\)\$%~!@#…&%￥—\+=、。，？；‘’“”：·`]/g;
+    const punctuationReg = /[<>《》！*(^)$%~!@#…&%￥—+=、。，？；‘’“”：·`]/g;
     return str.replace(punctuationReg, "").replace(badCharsReg, "");
   }
 
