@@ -1,34 +1,15 @@
-import React, { useState } from "react";
-import {
-  AppBar,
-  Card,
-  Button,
-  CardContent,
-  CardActions,
-  TextField,
-  CssBaseline,
-  Grid,
-  Toolbar,
-  Typography,
-  Container,
-  Link,
-  Theme,
-} from "@material-ui/core";
+import React from "react";
+import { Theme, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Name from "./lib/name";
-import random from "./lib/random";
-import surnameList from "./assets/json/surname.json";
+import Footer from "./components/Footer";
+import Index from "./pages/Index";
+import Header from "./components/Header";
+import { Router, Route } from "react-router-dom";
+import { createHashHistory } from "history";
+import English from "./pages/English";
+import Chinese from "./pages/Chinese";
 
-function MadeWithLove() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Powered by "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI
-      </Link>
-    </Typography>
-  );
-}
+const history = createHashHistory();
 const useStyles = makeStyles((theme: Theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -61,126 +42,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// const classes = {};
-
-export default function App() {
-  const generateName = (len = 9) => {
-    const namer = new Name();
-    const names = [];
-    for (let i = 0; i < len; i++) {
-      const name = namer.generate();
-      if (name) {
-        names.push(name);
-      }
-    }
-    return names;
-  };
-
-  const generateSurname = () => {
-    return random.choice(surnameList);
-  };
-
-  const [names, setNames] = useState(generateName());
-  const [surname, setSurname] = useState("李");
+export default (props: any) => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            起啥名
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Header {...props} history={history} />
       <main>
         {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center" alignItems="center">
-                <Grid item>
-                  <TextField
-                    id="outlined-bare"
-                    defaultValue={surname}
-                    onChange={event => {
-                      setSurname(event.target.value);
-                    }}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item>
-                  <Button
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => setNames(generateName())}
-                  >
-                    随缘生成
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-        </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          <Grid container spacing={4}>
-            {names.map((item, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardContent
-                    className={classes.cardContent}
-                    style={{ height: 130 }}
-                  >
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {surname || generateSurname()}
-                      {item.name}
-                    </Typography>
-                    <Typography>
-                      {item.sentence &&
-                        item.sentence
-                          .split("")
-                          .map((char: any, index: number) => {
-                            const lineHight =
-                              item.sentence.indexOf(item.name[0]) === index ||
-                              item.sentence.lastIndexOf(item.name[1]) === index;
-                            return lineHight ? (
-                              <span style={{ color: "red" }} key={index}>
-                                {char}
-                              </span>
-                            ) : (
-                              char
-                            );
-                          })}
-                    </Typography>
-                  </CardContent>
-                  <CardActions style={{ height: 60 }}>
-                    <div />
-                    <div>
-                      ——《{item.tag} · {item.title}》
-                    </div>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+        <Box my={2}>
+          <Router history={history}>
+            {/* <Index classes={classes} /> */}
+            <Route path="/" exact component={Index} classes={classes} />
+            <Route path="/cn" component={Chinese} />
+            <Route path="/en" component={English} />
+          </Router>
+        </Box>
       </main>
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          尾部
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
-        >
-          不知道该写点啥，给各位拜个年吧！
-        </Typography>
-        <MadeWithLove />
-      </footer>
+      <Footer className={classes.footer} />
     </React.Fragment>
   );
-}
+};
