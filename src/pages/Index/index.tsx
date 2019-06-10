@@ -39,7 +39,7 @@ const Index = (props: IProps) => {
 
   const [names, setNames] = useState(generateName());
   const [surname, setSurname] = useState("李");
-  console.log(props);
+  // console.log(props);
   return (
     <React.Fragment>
       <div className={classes.heroContent}>
